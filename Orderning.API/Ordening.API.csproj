@@ -12,25 +12,32 @@
     <Compile Remove="Application\DomainEventHandlers\OrderPaid\**" />
     <Compile Remove="Application\DomainEventHandlers\OrderShipped\**" />
     <Compile Remove="Application\DomainEventHandlers\OrderStockConfirmed\**" />
+    <Compile Remove="Application\Models\**" />
     <Content Remove="Application\DomainEventHandlers\OrderCancelled\**" />
     <Content Remove="Application\DomainEventHandlers\OrderGracePeriodConfirmed\**" />
     <Content Remove="Application\DomainEventHandlers\OrderPaid\**" />
     <Content Remove="Application\DomainEventHandlers\OrderShipped\**" />
     <Content Remove="Application\DomainEventHandlers\OrderStockConfirmed\**" />
+    <Content Remove="Application\Models\**" />
     <EmbeddedResource Remove="Application\DomainEventHandlers\OrderCancelled\**" />
     <EmbeddedResource Remove="Application\DomainEventHandlers\OrderGracePeriodConfirmed\**" />
     <EmbeddedResource Remove="Application\DomainEventHandlers\OrderPaid\**" />
     <EmbeddedResource Remove="Application\DomainEventHandlers\OrderShipped\**" />
     <EmbeddedResource Remove="Application\DomainEventHandlers\OrderStockConfirmed\**" />
+    <EmbeddedResource Remove="Application\Models\**" />
     <None Remove="Application\DomainEventHandlers\OrderCancelled\**" />
     <None Remove="Application\DomainEventHandlers\OrderGracePeriodConfirmed\**" />
     <None Remove="Application\DomainEventHandlers\OrderPaid\**" />
     <None Remove="Application\DomainEventHandlers\OrderShipped\**" />
     <None Remove="Application\DomainEventHandlers\OrderStockConfirmed\**" />
+    <None Remove="Application\Models\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Application\Commands\CreateOrderCommand2.cs" />
+    <Compile Remove="Application\Commands\CreateOrderDraftCommand.cs" />
+    <Compile Remove="Application\Commands\CreateOrderDraftCommandHandler.cs" />
+    <Compile Remove="Extensions\BasketItemExtensions.cs" />
   </ItemGroup>
 
   <ItemGroup>

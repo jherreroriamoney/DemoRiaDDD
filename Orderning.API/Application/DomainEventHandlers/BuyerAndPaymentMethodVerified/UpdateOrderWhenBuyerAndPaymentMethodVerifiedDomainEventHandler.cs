@@ -1,10 +1,6 @@
 ﻿using MediatR;
 using Microsoft.eShopOnContainers.Services.Ordering.Domain.AggregatesModel.OrderAggregate;
-using Microsoft.Extensions.Logging;
 using Ordering.Domain.Events;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Ordering.API.Application.DomainEventHandlers.BuyerAndPaymentMethodVerified
 {

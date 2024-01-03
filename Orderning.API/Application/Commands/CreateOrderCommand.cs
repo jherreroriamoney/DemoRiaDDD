@@ -1,12 +1,5 @@
-﻿using System;
-using MediatR;
-using System.Collections.Generic;
+﻿using MediatR;
 using System.Runtime.Serialization;
-using System.Collections;
-using Ordering.API.Application.Models;
-using System.Linq;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace Microsoft.eShopOnContainers.Services.Ordering.API.Application.Commands
 {
@@ -62,23 +55,20 @@ namespace Microsoft.eShopOnContainers.Services.Ordering.API.Application.Commands
         [DataMember]
         public int CardTypeId { get; private set; }
 
-        //[DataMember]
-        //[JsonPropertyName("orderItems")]
-        //public IEnumerable<OrderItemDTO> OrderItems => _orderItems;
+        [DataMember(Name = "orderItems")]
+        public List<OrderItemDTO> OrderItems => _orderItems;
 
-        //public CreateOrderCommand()
-        //{
-        //    //_orderItems = new List<OrderItemDTO>();
-        //}
-
-        //public CreateOrderCommand(List<BasketItem> orderItems, string userId, string userName, string city, string street, string state, string country, string zipcode,
-        //    string cardNumber, string cardHolderName, DateTime cardExpiration,
-        //    string cardSecurityNumber, int cardTypeId)
-            public CreateOrderCommand(string userId, string userName, string city, string street, string state, string country, string zipcode,
-            string cardNumber, string cardHolderName, DateTime cardExpiration,
-            string cardSecurityNumber, int cardTypeId)
+        protected CreateOrderCommand()
         {
-           // _orderItems = orderItems.ToOrderItemsDTO().ToList();
+            _orderItems = new List<OrderItemDTO>();
+        }
+
+        public CreateOrderCommand(List<OrderItemDTO> orderItems, string userId, string userName, string city, string street, string state, string country, string zipcode,
+            string cardNumber, string cardHolderName, DateTime cardExpiration,
+            string cardSecurityNumber, int cardTypeId) : this()
+        {
+            //_orderItems = orderItems.ToOrderItemsDTO().ToList();
+            _orderItems = orderItems;
             UserId = userId;
             UserName = userName;
             City = city;
@@ -94,30 +84,31 @@ namespace Microsoft.eShopOnContainers.Services.Ordering.API.Application.Commands
         }
 
 
+        [DataContract]
         public class OrderItemDTO
         {
-            [JsonPropertyName("productId")]
+            [DataMember]
             public int ProductId { get; set; }
 
-            [JsonPropertyName("productName")]
+            [DataMember]
             public string ProductName { get; set; }
 
-            [JsonPropertyName("unitPrice")]
+            [DataMember]
             public decimal UnitPrice { get; set; }
 
-            [JsonPropertyName("discount")]
+            [DataMember]
             public decimal Discount { get; set; }
 
-            [JsonPropertyName("units")]
+            [DataMember]
             public int Units { get; set; }
 
-            [JsonPropertyName("pictureUrl")]
+            [DataMember]
             public string PictureUrl { get; set; }
 
 
             public OrderItemDTO()
             {
-                    
+
             }
         }
     }

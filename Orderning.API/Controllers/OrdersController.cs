@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.eShopOnContainers.Services.Ordering.API.Application.Commands;
 using Microsoft.eShopOnContainers.Services.Ordering.API.Application.Queries;
@@ -8,7 +7,7 @@ using Microsoft.eShopOnContainers.Services.Ordering.API.Infrastructure.Services;
 namespace Microsoft.eShopOnContainers.Services.Ordering.API.Controllers
 {
     [Route("api/v1/[controller]")]
-   // [Authorize]
+    // [Authorize]
     [ApiController]
     public class OrdersController : ControllerBase
     {
@@ -129,7 +128,7 @@ namespace Microsoft.eShopOnContainers.Services.Ordering.API.Controllers
 
             return Ok(cardTypes);
         }
-        */
+        
         [Route("draft")]
         [HttpPost]
         public async Task<ActionResult<OrderDraftDTO>> CreateOrderDraftFromBasketDataAsync([FromBody] CreateOrderDraftCommand createOrderDraftCommand)
@@ -143,7 +142,7 @@ namespace Microsoft.eShopOnContainers.Services.Ordering.API.Controllers
 
             return await _mediator.Send(createOrderDraftCommand);
         }
-        
+        */
         [Route("createOrder")]
         [HttpPost]
         public async Task<ActionResult<bool>> CreateOrderDataAsync([FromBody] CreateOrderCommand createOrdertCommand)

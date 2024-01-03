@@ -25,7 +25,7 @@
                 context.OrderStatus.AddRange(GetPredefinedOrderStatus());
             }
 
-            if (!context.Buyers.Any()) 
+            if (!context.Buyers.Any())
             {
                 context.Buyers.AddRange(GetDummyBuyer());
             }

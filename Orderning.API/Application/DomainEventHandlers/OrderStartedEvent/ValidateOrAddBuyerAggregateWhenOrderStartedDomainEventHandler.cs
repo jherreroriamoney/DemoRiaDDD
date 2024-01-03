@@ -1,12 +1,7 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.eShopOnContainers.Services.Ordering.API.Infrastructure.Services;
 using Microsoft.eShopOnContainers.Services.Ordering.Domain.AggregatesModel.BuyerAggregate;
 
 using Ordering.Domain.Events;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Ordering.API.Application.DomainEventHandlers.OrderStartedEvent
 {
