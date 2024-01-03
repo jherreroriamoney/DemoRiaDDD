@@ -39,6 +39,7 @@
     <Compile Remove="Application\Commands\CreateOrderDraftCommandHandler.cs" />
     <Compile Remove="Application\DomainEventHandlers\OrderStartedEvent\SendEmailToCustomerWhenOrderStartedDomainEventHandler.cs" />
     <Compile Remove="Extensions\BasketItemExtensions.cs" />
+    <Compile Remove="OrderingSettings.cs" />
   </ItemGroup>
 
   <ItemGroup>
