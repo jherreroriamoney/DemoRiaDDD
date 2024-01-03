@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.eShopOnContainers.Services.Ordering.API.Application.Commands;
 using Microsoft.eShopOnContainers.Services.Ordering.API.Application.Queries;
 using Microsoft.eShopOnContainers.Services.Ordering.API.Infrastructure.Services;
+using System.Net;
 
 namespace Microsoft.eShopOnContainers.Services.Ordering.API.Controllers
 {
@@ -17,14 +18,14 @@ namespace Microsoft.eShopOnContainers.Services.Ordering.API.Controllers
         private readonly ILogger<OrdersController> _logger;
 
         public OrdersController(
-            IMediator mediator
-            //IOrderQueries orderQueries,
+            IMediator mediator,
+            IOrderQueries orderQueries
             //IIdentityService identityService,
             //ILogger<OrdersController> logger
             )
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
-            //_orderQueries = orderQueries ?? throw new ArgumentNullException(nameof(orderQueries));
+            _orderQueries = orderQueries ?? throw new ArgumentNullException(nameof(orderQueries));
             //_identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
             //_logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
@@ -89,6 +90,21 @@ namespace Microsoft.eShopOnContainers.Services.Ordering.API.Controllers
             return Ok();
         }
 
+        [Route("draft")]
+        [HttpPost]
+        public async Task<ActionResult<OrderDraftDTO>> CreateOrderDraftFromBasketDataAsync([FromBody] CreateOrderDraftCommand createOrderDraftCommand)
+        {
+            //_logger.LogInformation(
+            //    "----- Sending command: {CommandName} - {IdProperty}: {CommandId} ({@Command})",
+            //    nameof(CreateOrderDraftCommand),//createOrderDraftCommand.GetGenericTypeName(),
+            //    nameof(createOrderDraftCommand.BuyerId),
+            //    createOrderDraftCommand.BuyerId,
+            //    createOrderDraftCommand);
+
+            return await _mediator.Send(createOrderDraftCommand);
+        }
+        */
+
         [Route("{orderId:int}")]
         [HttpGet]
         [ProducesResponseType(typeof(Order),(int)HttpStatusCode.OK)]
@@ -109,15 +125,15 @@ namespace Microsoft.eShopOnContainers.Services.Ordering.API.Controllers
             }
         }
 
-        [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<OrderSummary>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<IEnumerable<OrderSummary>>> GetOrdersAsync()
-        {
-            var userid = _identityService.GetUserIdentity();
-            var orders = await _orderQueries.GetOrdersFromUserAsync(Guid.Parse(userid));
+        //[HttpGet]
+        //[ProducesResponseType(typeof(IEnumerable<OrderSummary>), (int)HttpStatusCode.OK)]
+        //public async Task<ActionResult<IEnumerable<OrderSummary>>> GetOrdersAsync()
+        //{
+        //    var userid = _identityService.GetUserIdentity();
+        //    var orders = await _orderQueries.GetOrdersFromUserAsync(Guid.Parse(userid));
 
-            return Ok(orders);
-        }
+        //    return Ok(orders);
+        //}
 
         [Route("cardtypes")]
         [HttpGet]
@@ -129,20 +145,8 @@ namespace Microsoft.eShopOnContainers.Services.Ordering.API.Controllers
             return Ok(cardTypes);
         }
         
-        [Route("draft")]
-        [HttpPost]
-        public async Task<ActionResult<OrderDraftDTO>> CreateOrderDraftFromBasketDataAsync([FromBody] CreateOrderDraftCommand createOrderDraftCommand)
-        {
-            //_logger.LogInformation(
-            //    "----- Sending command: {CommandName} - {IdProperty}: {CommandId} ({@Command})",
-            //    nameof(CreateOrderDraftCommand),//createOrderDraftCommand.GetGenericTypeName(),
-            //    nameof(createOrderDraftCommand.BuyerId),
-            //    createOrderDraftCommand.BuyerId,
-            //    createOrderDraftCommand);
-
-            return await _mediator.Send(createOrderDraftCommand);
-        }
-        */
+        
+        
         [Route("createOrder")]
         [HttpPost]
         public async Task<ActionResult<bool>> CreateOrderDataAsync([FromBody] CreateOrderCommand createOrdertCommand)
