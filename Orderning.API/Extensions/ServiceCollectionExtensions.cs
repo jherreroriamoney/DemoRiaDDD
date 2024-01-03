@@ -1,8 +1,6 @@
 ﻿using MediatR;
-using Microsoft.eShopOnContainers.Services.Ordering.API.Application.Commands;
 using Microsoft.eShopOnContainers.Services.Ordering.API.Application.Queries;
 using Microsoft.eShopOnContainers.Services.Ordering.API.Infrastructure.Services;
-using System.Reflection;
 
 namespace Ordening.API.Extensions
 {
@@ -22,11 +20,12 @@ namespace Ordening.API.Extensions
             });
 
             // Registro de servicio que consume la infraestructura
-            //services.AddTransient<IIdentityService, IdentityService>();
+            services.AddHttpContextAccessor();
+            services.AddTransient<IIdentityService, IdentityService>();
 
             // Registro de queries
             //Es lo mismo que esto "services.AddScoped<IUserQueries, UserQueries>();" pero para pasarle parametros al constructor
-            //services.AddScoped<IOrderQueries>(sp => new OrderQueries(configuration.GetConnectionString("SQLServer") ?? "Invalid configuration.GetConnectionString(\"SQLServer\")"));
+            services.AddScoped<IOrderQueries>(sp => new OrderQueries(configuration.GetConnectionString("DefaultConnection") ?? "Invalid configuration.GetConnectionString(\"SQLServer\")"));
 
             return services;
         }

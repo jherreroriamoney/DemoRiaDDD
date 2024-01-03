@@ -53,7 +53,7 @@
 
         private static Buyer GetDummyBuyer()
         {
-            return new Buyer(Guid.NewGuid().ToString(), "Paco Buyo");
+            return new Buyer(Guid.NewGuid().ToString(), "TestUser");
         }
     }
 }

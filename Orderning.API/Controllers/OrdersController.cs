@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.eShopOnContainers.Services.Ordering.API.Application.Commands;
 using Microsoft.eShopOnContainers.Services.Ordering.API.Application.Queries;
@@ -8,7 +9,7 @@ using System.Net;
 namespace Microsoft.eShopOnContainers.Services.Ordering.API.Controllers
 {
     [Route("api/v1/[controller]")]
-    // [Authorize]
+    [Authorize]
     [ApiController]
     public class OrdersController : ControllerBase
     {
@@ -19,14 +20,14 @@ namespace Microsoft.eShopOnContainers.Services.Ordering.API.Controllers
 
         public OrdersController(
             IMediator mediator,
-            IOrderQueries orderQueries
-            //IIdentityService identityService,
+            IOrderQueries orderQueries,
+            IIdentityService identityService
             //ILogger<OrdersController> logger
             )
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
             _orderQueries = orderQueries ?? throw new ArgumentNullException(nameof(orderQueries));
-            //_identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
+            _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
             //_logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
         /*
@@ -125,15 +126,15 @@ namespace Microsoft.eShopOnContainers.Services.Ordering.API.Controllers
             }
         }
 
-        //[HttpGet]
-        //[ProducesResponseType(typeof(IEnumerable<OrderSummary>), (int)HttpStatusCode.OK)]
-        //public async Task<ActionResult<IEnumerable<OrderSummary>>> GetOrdersAsync()
-        //{
-        //    var userid = _identityService.GetUserIdentity();
-        //    var orders = await _orderQueries.GetOrdersFromUserAsync(Guid.Parse(userid));
+        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<OrderSummary>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<OrderSummary>>> GetOrdersAsync()
+        {
+            var userid = _identityService.GetUserIdentity();
+            var orders = await _orderQueries.GetOrdersFromUserAsync(Guid.Parse(userid));
 
-        //    return Ok(orders);
-        //}
+            return Ok(orders);
+        }
 
         [Route("cardtypes")]
         [HttpGet]
@@ -147,7 +148,7 @@ namespace Microsoft.eShopOnContainers.Services.Ordering.API.Controllers
         
         
         
-        [Route("createOrder")]
+        [Route("create")]
         [HttpPost]
         public async Task<ActionResult<bool>> CreateOrderDataAsync([FromBody] CreateOrderCommand createOrdertCommand)
         {

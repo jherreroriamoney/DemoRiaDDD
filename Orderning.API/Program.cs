@@ -1,6 +1,7 @@
 using Microsoft.eShopOnContainers.Services.Ordering.API.Infrastructure;
 using Microsoft.eShopOnContainers.Services.Ordering.Infrastructure;
 using Ordening.API.Extensions;
+using Ordering.API.Infrastructure.Middlewares;
 using Ordering.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,6 +36,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Añade los Middleware, en este caso solo uno para hacer byPass en la autenticación y autorización
+app.UseByPassAuthMiddleware();
 
 app.UseHttpsRedirection();
 
