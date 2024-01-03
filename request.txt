@@ -1,0 +1,49 @@
+// Draft
+{
+  "buyerId": "buyer_001",
+  "items": [
+    {
+      "id": "item_001",
+      "productId": 1,
+      "productName": "balon",
+      "unitPrice": 10,
+      "oldUnitPrice": 9,
+      "quantity": 2,
+      "pictureUrl": "string"
+    }
+  ]
+}
+
+
+{
+  "userId": "1afe4330-f878-4aa9-ad14-5c7802015862",
+  "userName": "Paco Buyo",
+  "city": "Madrid",
+  "street": "Castellana",
+  "state": "Spain",
+  "country": "Spain",
+  "zipCode": "28007",
+  "cardNumber": "123456789",
+  "cardHolderName": "Paco Buyo",
+  "cardExpiration": "2024-01-10T09:08:40.763Z",
+  "cardSecurityNumber": "1001",
+  "cardTypeId": 3,
+  "orderItems": [
+    {
+      "productId": 1,
+      "productName": "balon",
+      "unitPrice": 100,
+      "discount": 0,
+      "units": 2,
+      "pictureUrl": ""
+    },
+    {
+      "productId": 2,
+      "productName": "guantes",
+      "unitPrice": 20,
+      "discount": 10,
+      "units": 1,
+      "pictureUrl": ""
+    }	
+  ]
+}

@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Application\DomainEventHandlers\OrderCancelled\**" />
+    <Compile Remove="Application\DomainEventHandlers\OrderGracePeriodConfirmed\**" />
+    <Compile Remove="Application\DomainEventHandlers\OrderPaid\**" />
+    <Compile Remove="Application\DomainEventHandlers\OrderShipped\**" />
+    <Compile Remove="Application\DomainEventHandlers\OrderStockConfirmed\**" />
+    <Content Remove="Application\DomainEventHandlers\OrderCancelled\**" />
+    <Content Remove="Application\DomainEventHandlers\OrderGracePeriodConfirmed\**" />
+    <Content Remove="Application\DomainEventHandlers\OrderPaid\**" />
+    <Content Remove="Application\DomainEventHandlers\OrderShipped\**" />
+    <Content Remove="Application\DomainEventHandlers\OrderStockConfirmed\**" />
+    <EmbeddedResource Remove="Application\DomainEventHandlers\OrderCancelled\**" />
+    <EmbeddedResource Remove="Application\DomainEventHandlers\OrderGracePeriodConfirmed\**" />
+    <EmbeddedResource Remove="Application\DomainEventHandlers\OrderPaid\**" />
+    <EmbeddedResource Remove="Application\DomainEventHandlers\OrderShipped\**" />
+    <EmbeddedResource Remove="Application\DomainEventHandlers\OrderStockConfirmed\**" />
+    <None Remove="Application\DomainEventHandlers\OrderCancelled\**" />
+    <None Remove="Application\DomainEventHandlers\OrderGracePeriodConfirmed\**" />
+    <None Remove="Application\DomainEventHandlers\OrderPaid\**" />
+    <None Remove="Application\DomainEventHandlers\OrderShipped\**" />
+    <None Remove="Application\DomainEventHandlers\OrderStockConfirmed\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Application\Commands\CreateOrderCommand2.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.28" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Ordering.Domain\Ordering.Domain.csproj" />
+    <ProjectReference Include="..\Ordering.Infrastructure\Ordering.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
