@@ -1,6 +1,7 @@
 ﻿namespace Microsoft.eShopOnContainers.Services.Ordering.API.Infrastructure
 {
     using global::Ordering.Domain.SeedWork;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.eShopOnContainers.Services.Ordering.Domain.AggregatesModel.BuyerAggregate;
     using Microsoft.eShopOnContainers.Services.Ordering.Domain.AggregatesModel.OrderAggregate;
     using Ordering.Infrastructure;
@@ -12,6 +13,8 @@
     {
         public async Task SeedAsync(OrderingContext context)
         {
+            //context.Database.EnsureCreated(); // este método no ejecuta por defecto las migraciones, solo crea la base de datos
+            context.Database.Migrate();
 
             if (!context.CardTypes.Any())
             {
