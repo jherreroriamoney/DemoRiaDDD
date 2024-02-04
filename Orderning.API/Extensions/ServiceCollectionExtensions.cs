@@ -1,6 +1,10 @@
-﻿using MediatR;
+﻿using eShop.Ordering.API.Application.Validations;
+using FluentValidation;
+using MediatR;
+using Microsoft.eShopOnContainers.Services.Ordering.API.Application.Commands;
 using Microsoft.eShopOnContainers.Services.Ordering.API.Application.Queries;
 using Microsoft.eShopOnContainers.Services.Ordering.API.Infrastructure.Services;
+using Ordering.API.Application.Behaviors;
 
 namespace Ordening.API.Extensions
 {
@@ -9,15 +13,19 @@ namespace Ordening.API.Extensions
         public static IServiceCollection RegisterApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
             // Se registra MediatR
-            //services.AddMediatR(typeof(CreateOrderDraftCommandHandler).GetTypeInfo().Assembly);
+
+            // Register the command validators for the validator behavior (validators based on FluentValidation library)
+            services.AddScoped<IValidator<CreateOrderCommand>, CreateOrderCommandValidator>();
+
             services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssemblyContaining(typeof(Program));
 
-                //cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
-                //cfg.AddOpenBehavior(typeof(ValidatorBehavior<,>));
+                //TODO: Añadir los Behavior de MediatR
+                cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
+                cfg.AddOpenBehavior(typeof(ValidatorBehavior<,>));
                 //cfg.AddOpenBehavior(typeof(TransactionBehavior<,>));
-            });
+            }); 
 
             // Registro de servicio que consume la infraestructura
             services.AddHttpContextAccessor();
