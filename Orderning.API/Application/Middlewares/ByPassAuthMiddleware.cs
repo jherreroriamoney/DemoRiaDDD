@@ -12,7 +12,7 @@ namespace Ordering.API.Infrastructure.Middlewares
     {
         private readonly RequestDelegate _next;
         private string _currentUserId;
-        public ByPassAuthMiddleware(RequestDelegate next)
+        public ByPassAuthMiddleware(RequestDelegate next) // TODO: Repasar este Middleware y hacer algun otro de ejemplo, como el de duración de una request
         {
             _next = next;
             _currentUserId = null;
@@ -21,6 +21,7 @@ namespace Ordering.API.Infrastructure.Middlewares
 
         public async Task Invoke(HttpContext context)
         {
+            System.Diagnostics.Debug.WriteLine(" >>>> ByPassAuthMiddleware - Start"); 
             var path = context.Request.Path;
             if (path == "/noauth")
             {
@@ -73,6 +74,8 @@ namespace Ordering.API.Infrastructure.Middlewares
                 }
 
                 await _next.Invoke(context);
+
+                System.Diagnostics.Debug.WriteLine(" >>>> ByPassAuthMiddleware - End");
             }
         }
     }
